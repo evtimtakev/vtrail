@@ -6,7 +6,7 @@ from io import open
 
 max_fatures = 2000
 max_len = 200
-sentiment = [0, -1, 1]
+sentiment_positions = [-1, 0, 1]
 
 
 def sentiment_classification(model, loaded_tokenizer, data, filter=1):
@@ -18,10 +18,10 @@ def sentiment_classification(model, loaded_tokenizer, data, filter=1):
     }
 
     for t in data:
-        sequence = loaded_tokenizer.texts_to_sequences(["".join(t["text"])])
+        sequence = loaded_tokenizer.texts_to_sequences([t["text"]])
         test_padded = pad_sequences(sequence, maxlen=max_len)
 
-        prediction = sentiment[np.around(model.predict(test_padded), decimals=0).argmax(axis=1)[0]]
+        prediction = sentiment_positions[np.around(model.predict(test_padded), decimals=0).argmax(axis=1)[0]]
 
         if prediction == 0:
             predictions["neutral"].append(t)
@@ -43,7 +43,7 @@ def categorical_classification(model, loaded_tokenizer, data, filter=1):
 
 
 def prep_sentiment_model():
-    model_sentiment = keras.saving.load_model("./sentiment_classifier/model")
+    model_sentiment = keras.saving.load_model("./sentiment_classifier/model_new")
 
     with open("./sentiment_classifier/tokenizer/tokenizer.pickle", "rb") as handle:
         sentiment_tokenizer = pickle.load(handle)
