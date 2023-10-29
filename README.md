@@ -67,7 +67,8 @@ Make sure you have the following installed:
     ```
 
     ```bash
-    source venv/bin/activate
+   python -m venv ai
+    source ai/bin/activate
     ```
    
     ```bash
