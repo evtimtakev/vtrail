@@ -3,7 +3,7 @@ from ai import prep_sentiment_model, sentiment_classification, prep_category_cla
 
 app = Flask(__name__)
 model_sentiment, sentiment_tokenizer = prep_sentiment_model()
-model_category, category_tokenizer = prep_category_classification_model()
+# model_category, category_tokenizer = prep_category_classification_model()
 
 PROMPTS = {
     "sentiment": "s",
@@ -18,7 +18,8 @@ def my_test_endpoint():
     if prompt == PROMPTS["sentiment"]:
         response = sentiment_classification(model_sentiment, sentiment_tokenizer, input_json["content"], input_json["filter"])
     elif prompt == PROMPTS["category"]:
-        response = categorical_classification(model_category, category_tokenizer, input_json["content"], input_json["filter"])
+        response = {}
+        # response = categorical_classification(model_category, category_tokenizer, input_json["content"], input_json["filter"])
     else:
         response = {}
 
