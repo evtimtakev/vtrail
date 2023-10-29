@@ -3,3 +3,4 @@
 /Crawler/infrastructure/aws/test-env/node_modules
 /Crawler/api/node_modules
 /AI/ai
+.idea
