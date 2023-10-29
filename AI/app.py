@@ -11,7 +11,7 @@ PROMPTS = {
 }
 
 @app.route("/predict", methods=["POST"])
-def my_test_endpoint():
+def make_predictions():
     input_json = request.get_json(force=True)
     prompt = input_json["prm"]
 
