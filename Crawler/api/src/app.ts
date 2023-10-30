@@ -7,7 +7,6 @@ import { getSocialMediaData } from "./routes";
 
 const APP_PORT = 3000;
 
-
 const app = express();
 app.use(bodyParser());
 

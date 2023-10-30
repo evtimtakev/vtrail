@@ -43,9 +43,9 @@ def categorical_classification(model, loaded_tokenizer, data, filter=1):
 
 
 def prep_sentiment_model():
-    model_sentiment = keras.saving.load_model("./sentiment_classifier/model_new")
+    model_sentiment = keras.models.load_model("./sentiment_classifier/model_v1")
 
-    with open("./sentiment_classifier/tokenizer/tokenizer.pickle", "rb") as handle:
+    with open("./sentiment_classifier/tokenizers/tokenizer_v1.pickle", "rb") as handle:
         sentiment_tokenizer = pickle.load(handle)
 
     return model_sentiment, sentiment_tokenizer
