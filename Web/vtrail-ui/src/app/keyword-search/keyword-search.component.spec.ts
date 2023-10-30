@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KeyWordSearchComponent } from './key-word-search.component';
+import { KeywordSearchComponent } from './key-word-search.component';
 
 describe('KeyWordSearchComponent', () => {
-  let component: KeyWordSearchComponent;
-  let fixture: ComponentFixture<KeyWordSearchComponent>;
+  let component: KeywordSearchComponent;
+  let fixture: ComponentFixture<KeywordSearchComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [KeyWordSearchComponent]
+      declarations: [KeywordSearchComponent]
     });
-    fixture = TestBed.createComponent(KeyWordSearchComponent);
+    fixture = TestBed.createComponent(KeywordSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
