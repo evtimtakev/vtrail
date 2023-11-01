@@ -15,22 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSocialMediaData = void 0;
 const index_js_1 = __importDefault(require("../../social-media-crawler/index.js"));
 const { crawlSocialMedia } = index_js_1.default;
-const PREDICT_API_URL = "http://127.0.0.1:5000/predict";
-const SOCIAL_MEDIA_FILTERS = {
-    redit: {
-        searchTerms: [],
-        filterAmount: 1,
-        filterUnit: "w"
-    },
-    stackoverflow: {
-        searchTerms: [],
-        filterAmount: 1,
-        filterUnit: "w"
-    },
-    twitter: {
-        searchTerms: [],
-    }
-};
 const getSocialMediaData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const socialNetworks = req.body;

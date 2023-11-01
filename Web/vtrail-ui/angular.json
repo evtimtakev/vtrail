@@ -57,19 +57,22 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options":  {
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "vtrail-ui:build:production"
             },
             "development": {
-              "browserTarget": "vtrail-ui:build:development"
+              "browserTarget": "vtrail-ui:build:development",
             }
           },
           "defaultConfiguration": "development"
@@ -94,7 +97,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@clr/ui/clr-ui.min.css"
             ],
             "scripts": []
           }

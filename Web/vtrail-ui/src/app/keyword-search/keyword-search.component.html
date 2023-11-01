@@ -1,15 +1,11 @@
-<div class="clr-row">
-  <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-    <div class="card">
-      <h3 class="card-header">Key words</h3>
-      <div class="card-block">
-        <h4 class="card-title">Block</h4>
-        <div class="card-text">...</div>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-sm btn-link">Footer Action 1</button>
-        <button class="btn btn-sm btn-link">Footer Action 2</button>
-      </div>
+<div class="card">
+  <h3 class="card-header">Keywords</h3>
+  <div class="card-block">
+    <input clrInput placeholder="Keywords" name="input" (ngModelChange)="onChange($event)" [(ngModel)]="input" />
+    <div class="card-text">
+      <p class="d-flex">
+        <span><cds-icon shape="exclamation-triangle" size="md"></cds-icon></span>
+        <span class="mt-5">Please provide some keywords spited with ","</span></p>
     </div>
   </div>
 </div>

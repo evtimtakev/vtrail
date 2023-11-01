@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {LoadingState} from "../common/types";
+
 
 @Component({
   selector: 'app-loader',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./loader.component.scss']
 })
 export class LoaderComponent {
+
+  @Input() state: LoadingState = 'fetchingData'
+  @Input() isLoading: boolean = false;
 
 }

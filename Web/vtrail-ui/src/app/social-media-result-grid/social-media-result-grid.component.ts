@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-social-media-result-grid',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./social-media-result-grid.component.scss']
 })
 export class SocialMediaResultGridComponent {
+  @Input() gridItems: any[] = [];
 
+  @Input() isLoading: boolean = false;
 }

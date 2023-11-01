@@ -1,5 +1,5 @@
 <header class="header-6">
-   <div class="branding">Vtrail</div>
+   <div class="branding pt-12">VTrail</div>
   <!-- <div class="header-nav">
     <a href="javascript://" class="active nav-link nav-text">Dashboard</a>
     <a href="javascript://" class="nav-link nav-text">Interactive Analytics</a>
@@ -13,10 +13,23 @@
 <div class="content-container">
   <div class="content-area">
     <section class="main">
-      <app-keyword-search></app-keyword-search>
-      <app-prompt-search></app-prompt-search>
-      <app-loader></app-loader>
-      <app-social-media-result-grid></app-social-media-result-grid>
+      <div class="clr-row">
+        <div class="clr-col-6">
+          <app-keyword-search (keywords)="updateKeywords($event)"></app-keyword-search>
+        </div>
+        <div class="clr-col-6">
+          <app-prompt-search (prompts)="updatePrompts($event)"></app-prompt-search>
+        </div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-6"></div>
+        <div class="clr-col-2">
+          <button class="btn btn-primary width-100" (click)="search()">Search</button>
+        </div>
+      </div>
+      <div class="loader-wrapper"><app-loader [isLoading]="loading" [state]="loadingState"></app-loader></div>
+      <app-social-media-result-grid [gridItems]="searchResult" [isLoading]="loading"></app-social-media-result-grid>
     </section>
   </div>
 </div>

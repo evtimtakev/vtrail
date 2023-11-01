@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-prompt-search',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./prompt-search.component.scss']
 })
 export class PromptSearchComponent {
+
+  public prompt: string = "";
+  @Output() prompts = new EventEmitter<string>();
+
+  onChange(value: string) {
+    this.prompts.emit(value);
+  }
 
 }

@@ -1,15 +1,11 @@
-<div class="clr-row">
-  <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-    <div class="card">
-      <h3 class="card-header">Prompts</h3>
-      <div class="card-block">
-        <h4 class="card-title">Block</h4>
-        <div class="card-text">...</div>
-      </div>
-      <div class="card-footer">
-        <button class="btn btn-sm btn-link">Footer Action 1</button>
-        <button class="btn btn-sm btn-link">Footer Action 2</button>
-      </div>
+<div class="card">
+  <h3 class="card-header">Prompts</h3>
+  <div class="card-block">
+    <input clrInput placeholder="Prompts" name="input" (ngModelChange)="onChange($event)" [(ngModel)]="prompt" />
+    <div class="card-text">
+      <p class="d-flex">
+        <span><cds-icon shape="exclamation-triangle" size="md"></cds-icon></span>
+        <span>Please provide prompts in the format :/social-media1,social-media2,social-media3#negative,positive,all@category1,category2</span></p>
     </div>
   </div>
 </div>

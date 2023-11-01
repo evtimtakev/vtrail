@@ -1,3 +1,53 @@
 .main {
   padding: 25px
 }
+
+.d-flex {
+  display: flex;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.pt-12 {
+  padding-top: .9rem!important;
+}
+
+.branding {
+  font-size: 1.9rem;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.card {
+  min-height: 230px;
+}
+
+.progress {
+  margin-top: 0!important;
+}
+
+.clr-control-container {
+  width: 100%!important;
+
+  .clr-input-wrapper {
+    width: 100%!important;
+
+
+    input {
+      width: 100%!important;
+    }
+  }
+}
+
+.no-data {
+  padding: 50px;
+  text-align: center;
+}
+
+.loader-wrapper {
+  min-height: 80px;
+}

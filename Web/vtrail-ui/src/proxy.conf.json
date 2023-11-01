@@ -1,0 +1,14 @@
+{
+  "/v1/crawler/collect": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "loglevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/predict": {
+    "target": "http://localhost:5000",
+    "secure": false,
+    "loglevel": "debug",
+    "changeOrigin": true
+  }
+}

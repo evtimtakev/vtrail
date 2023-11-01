@@ -10,7 +10,7 @@ PROMPTS = {
     "category": "c"
 }
 
-@app.route("/predict", methods=["POST"])
+@app.route("/api/predict", methods=["POST"])
 def make_predictions():
     input_json = request.get_json(force=True)
     prompt = input_json["prm"]
