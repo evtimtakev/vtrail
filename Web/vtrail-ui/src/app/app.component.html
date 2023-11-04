@@ -11,8 +11,50 @@
   </div>
 </header>
 <div class="content-container">
+  <img src="assets/download.svg" class="bg-image">
+
   <div class="content-area">
     <section class="main">
+      <div class="alert alert-info mt-20" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon class="alert-icon" shape="info-circle"></cds-icon>
+            </div>
+            <div class="alert-text">
+              <h3 class="no-margin">Keywords</h3>
+              <div>
+                Please provide the necessary keywords spited with ",".
+              </div>
+              <div>
+                <b>Example:</b> VMware,VCDR,vSAN
+              </div>
+
+              <h3>Prompts</h3>
+              <div>
+                The prompts will instruct our AI how to filter the data.
+                The format is as follows
+              </div>
+              <div><b> social network name + type of filter + the filter value</b></div>
+              <div>
+                The supported social media platforms are
+                <div><b>Tweeter</b></div>
+                <div><b>Reddit</b></div>
+                <div><b>Stack Overflow</b></div>
+              </div>
+              <div>
+                The supported type of filters are
+                <div><b>s - sentiment analysis (negative, neutral, positive) </b></div>
+                <div><b>c - categorization </b></div>
+              </div>
+              <div>
+                <span>Example:</span>
+                <div><b>redit+s+negative</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="clr-row">
         <div class="clr-col-6">
           <app-keyword-search (keywords)="updateKeywords($event)"></app-keyword-search>

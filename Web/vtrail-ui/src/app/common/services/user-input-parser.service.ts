@@ -12,7 +12,7 @@ export class UserInputParserService {
   sentimentMap: any = {
     "negative": -1,
     "neutral": 0,
-    "positive": 1
+    "positive": 1,
   }
 
   constructor() { }
@@ -38,6 +38,6 @@ export class UserInputParserService {
       "filter": this.sentimentMap[sentimentSelection],
     }
 
-    return { socialMediaSearchQuery,  predictionQuery}
+    return { socialMediaSearchQuery,  predictionQuery }
   }
 }
