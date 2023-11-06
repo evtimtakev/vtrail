@@ -14,12 +14,14 @@ import { LoaderComponent } from './loader/loader.component';
 import {CommonHttpService} from "./common/services/common-http.service";
 import {CommonMappingService} from "./common/services/common-mapping.service";
 import {UserInputParserService} from "./common/services/user-input-parser.service";
+import {TimeSearchComponent} from "./time-search/time-search.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     KeywordSearchComponent,
     PromptSearchComponent,
+    TimeSearchComponent,
     SocialMediaResultGridComponent,
     LoaderComponent
   ],

@@ -52,18 +52,21 @@
               </div>
               <div>
                 <span>Example:</span>
-                <div><b>redit+s+negative</b></div>
+                <div><b>reddit+s+negative</b></div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="clr-row">
-        <div class="clr-col-6">
+        <div class="clr-col-4">
           <app-keyword-search (keywords)="updateKeywords($event)"></app-keyword-search>
         </div>
-        <div class="clr-col-6">
+        <div class="clr-col-4">
           <app-prompt-search (prompts)="updatePrompts($event)"></app-prompt-search>
+        </div>
+        <div class="clr-col-4">
+          <app-time-search (timeInterval)="updateTimeInterval($event)"></app-time-search>
         </div>
       </div>
       <div class="clr-row">

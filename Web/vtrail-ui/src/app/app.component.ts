@@ -16,6 +16,10 @@ export class AppComponent {
 
   public keywords: string = "";
   public prompts: string = ""
+  public timeInterval: any = {
+    amount: 1,
+    unit: "m"
+  }
   public searchResult: SocialMediaPost[] = [];
   public loading: boolean = false;
   public loadingState: LoadingState = "fetchingData";
@@ -35,6 +39,10 @@ export class AppComponent {
 
   updatePrompts(value: any) {
     this.prompts = value;
+  }
+
+  updateTimeInterval(timeInterval: any) {
+    this.timeInterval = timeInterval;
   }
 
   // const body = [{
@@ -58,7 +66,8 @@ export class AppComponent {
 
   search() {
     this.loading = true;
-    const { socialMediaSearchQuery, predictionQuery } = this.userInputParserService.parsePrompts(this.prompts, this.keywords);
+    const { socialMediaSearchQuery, predictionQuery } = this.userInputParserService.parsePrompts(
+      this.prompts, this.keywords, this.timeInterval.amount, this.timeInterval.unit);
     this.loadingState = "fetchingData"
     this.subscriptions.push(this.commonHttp.fetchSocialMediaPosts(socialMediaSearchQuery).subscribe(({ socials }: any = {}) => {
       let posts: SocialMediaPost[] = []

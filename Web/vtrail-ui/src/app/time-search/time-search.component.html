@@ -1,0 +1,26 @@
+<div>
+  <div class="card">
+    <h3 class="card-header">Time Interval</h3>
+    <div class="card-block">
+      <div class="clr-row">
+        <div class="clr-col-6" >
+          <input clrInput placeholder="Time Amount" name="input" (ngModelChange)="onAmountChange($event)" [ngModel]="timeAmount" />
+        </div>
+        <clr-select-container class="clr-col-6">
+          <select clrSelect name="options" required (ngModelChange)="onUnitChange($event)" [ngModel]="timeUnit">
+            <option value="d">Day</option>
+            <option value="w">Week</option>
+            <option value="m">Month</option>
+            <option value="y">Year</option>
+          </select>
+          <clr-control-helper>You could choose time unit</clr-control-helper>
+          <clr-control-error>This field is required</clr-control-error>
+        </clr-select-container>
+      </div>
+      <div class="card-text">
+
+      </div>
+    </div>
+  </div>
+
+</div>
