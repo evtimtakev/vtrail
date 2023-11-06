@@ -18,7 +18,6 @@ def sentiment_classification(model, loaded_tokenizer, data, filter=1):
     }
 
     for t in data:
-        print(t)
         sequence = loaded_tokenizer.texts_to_sequences([t["description"]])
         test_padded = pad_sequences(sequence, maxlen=max_len)
 

@@ -1,6 +1,6 @@
-# Vtrail
+# VTrail
 
-Vtrail is a web API that scrapes social media platforms including Twitter, Reddit, and Stack Overflow for posts. It classifies these posts by sentiment and category using an in-house machine learning model. The application consists of APIs written in Node.js and Python, as well as a user interface built with Angular.
+VTrail is a web API that scrapes social media platforms including Twitter, Reddit, and Stack Overflow for posts. It classifies these posts by sentiment and category using an in-house machine learning model. The application consists of APIs written in Node.js and Python, as well as a user interface built with Angular.
 
 ## Table of Contents
 
@@ -18,13 +18,13 @@ Vtrail is a web API that scrapes social media platforms including Twitter, Reddi
 
 ## Introduction
 
-Vtrail is a versatile tool designed to scrape social media posts from platforms like Twitter, Reddit, and Stack Overflow. It employs machine learning techniques to classify these posts based on sentiment and category, providing valuable insights for various applications.
+VTrail is a versatile tool designed to scrape social media posts from platforms like Twitter, Reddit, and Stack Overflow. It employs machine learning techniques to classify these posts based on sentiment and category, providing valuable insights for various applications.
 
 ## Features
 
-- Scrapes posts from Twitter, Reddit, and Stack Overflow.
+- Scrape posts from Twitter, Reddit, and Stack Overflow.
 - Classifies posts by sentiment (positive, negative, neutral).
-- Categorizes posts into predefined categories.
+- Categorize posts into predefined categories.
 - User-friendly web interface built with Angular.
 - APIs for seamless integration with other applications.
 
@@ -139,4 +139,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-- This project is base on the opne sourcce API Hermesv2 - https://github.com/evtimtakev/HermesV2
+- This project is base on the open source API Hermesv2 - https://github.com/evtimtakev/HermesV2
