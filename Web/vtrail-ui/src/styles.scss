@@ -73,3 +73,18 @@
 .content-container {
   position: relative;
 }
+
+
+.logo {
+  background: url("assets/logo.png");
+  width: 50px;
+  height: 50px;
+  background-size: 184%;
+  background-position: center;
+  margin-top: -10px;
+}
+
+.logo-text {
+  margin-top: 5px;
+  margin-left: 3px;
+}

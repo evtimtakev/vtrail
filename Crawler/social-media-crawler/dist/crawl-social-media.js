@@ -101,7 +101,7 @@ const crawlSocialMedia = (socialMediaSearch) => __awaiter(void 0, void 0, void 0
         };
         for (let i = 0; i <= socialMediaSearch.length - 1; i++) {
             const socialMedia = socialMediaSearch[i];
-            if (socialMedia.id === "redit") {
+            if (socialMedia.id === "reddit") {
                 const { searchTerms, filterUnit, filterAmount } = socialMedia;
                 const reditResult = yield crawlInRedit(searchTerms, filterAmount, filterUnit);
                 response.socials.push({ id: "redit", data: reditResult });

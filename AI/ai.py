@@ -4,8 +4,8 @@ from keras.preprocessing.sequence import pad_sequences
 import pickle
 from io import open
 
-max_fatures = 2000
-max_len = 200
+max_features = 6479
+max_len = 151
 sentiment_positions = [-1, 0, 1]
 
 
@@ -18,6 +18,7 @@ def sentiment_classification(model, loaded_tokenizer, data, filter=1):
     }
 
     for t in data:
+        print(t)
         sequence = loaded_tokenizer.texts_to_sequences([t["description"]])
         test_padded = pad_sequences(sequence, maxlen=max_len)
 
@@ -43,9 +44,9 @@ def categorical_classification(model, loaded_tokenizer, data, filter=1):
 
 
 def prep_sentiment_model():
-    model_sentiment = keras.models.load_model("./sentiment_classifier/model_v1")
+    model_sentiment = keras.models.load_model("./sentiment_classifier/final_sentiment_model")
 
-    with open("./sentiment_classifier/tokenizers/tokenizer_v1.pickle", "rb") as handle:
+    with open("./sentiment_classifier/tokenizers/tokenizer_new.pickle", "rb") as handle:
         sentiment_tokenizer = pickle.load(handle)
 
     return model_sentiment, sentiment_tokenizer

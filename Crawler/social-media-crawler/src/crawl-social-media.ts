@@ -8,7 +8,7 @@ import {TwitterSearch} from "./twiter/twiter-search";
 import * as cluster from "cluster";
 dotenv.config()
 
-type socialMediaType = "redit" | "stackoverflow" | "twitter";
+type socialMediaType = "reddit" | "stackoverflow" | "twitter";
 
 interface socialMediaFilter {
     searchTerms?: string[];
@@ -92,7 +92,7 @@ export const crawlSocialMedia = async (socialMediaSearch: socialMediaFilter[]): 
         for (let i = 0; i <= socialMediaSearch.length - 1; i++) {
             const socialMedia = socialMediaSearch[i];
 
-            if(socialMedia.id === "redit") {
+            if(socialMedia.id === "reddit") {
                 const { searchTerms, filterUnit, filterAmount } = socialMedia
                 const reditResult = await crawlInRedit(searchTerms, filterAmount, filterUnit);
                 response.socials.push({id: "redit", data: reditResult});
