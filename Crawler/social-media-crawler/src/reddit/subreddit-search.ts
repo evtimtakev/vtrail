@@ -5,14 +5,12 @@ import {PrintReportEntryModel} from "../common/models/print-report.model";
 import moment from "moment";
 dotenv.config()
 
-const REDIT_SEARCH_URL = `${process.env.REDIT_URL}/${process.env.REDIT_SUBREDIT_NAME}/search.json`;
-
-export class SubreditSearch {
+export class SubredditSearch {
 
     @GET(null, {"User-Agent": "MockClient/0.1 by Me"})
-    public static searchInSubredit(term: string): HttpRequest | any {
+    public static searchInSubreddit(subreddit: string, term: string): HttpRequest | any {
         return {
-            url: REDIT_SEARCH_URL,
+            url: SubredditSearch.buildUrl(subreddit),
             params: {
                 q: term,
                 limit: 50,
@@ -22,8 +20,12 @@ export class SubreditSearch {
         };
     }
 
-    public static toReportModel(subreditPosts: any[]): PrintReportEntryModel[] {
-        return subreditPosts.map(({ data }) => ({
+    public static buildUrl(subreddit: string): string {
+        return process.env.REDDIT_URL + "/r/" + subreddit + "/search.json";
+    }
+
+    public static toReportModel(subREDDITPosts: any[]): PrintReportEntryModel[] {
+        return subREDDITPosts.map(({ data }) => ({
             description: data.selftext,
             title: data.title,
             url: data.url,

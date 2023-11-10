@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
-})
+              providedIn: 'root'
+            })
 export class UserInputParserService {
 
   keywordsBreakChar = ","
@@ -15,18 +15,20 @@ export class UserInputParserService {
     "positive": 1,
   }
 
-  constructor() { }
+  constructor() {
+  }
 
-  parsePrompts(rawPrompts: string, rawKeywords: string, filterAmount: number = 1, filterUnit: string = "m") {
-      const prompts = rawPrompts.split(this.promptBreakChar)
-      const keywords = rawKeywords.split(this.keywordsBreakChar)
-      const socialMedia = prompts[0]?.split(this.keywordsBreakChar) || [];
-      const sentiment = prompts[1] || "s";
-      const sentimentSelection = prompts[2] || "neutral";
+  parsePrompts(socialMediaIds: string[], rawPrompts: string, endpoint: string, rawKeywords: string, filterAmount: number = 1,
+               filterUnit: string = "m") {
+    const prompts = rawPrompts.split(this.promptBreakChar)
+    const keywords = rawKeywords.split(this.keywordsBreakChar)
+    const sentiment = prompts[1] || "s";
+    const sentimentSelection = prompts[2] || "neutral";
 
-    const socialMediaSearchQuery = socialMedia.map((socialMedia) => {
+    const socialMediaSearchQuery = socialMediaIds.map((socialMedia) => {
       return {
         id: socialMedia,
+        endpoint: endpoint,
         searchTerms: keywords,
         filterAmount: filterAmount,
         filterUnit: filterUnit
@@ -38,6 +40,6 @@ export class UserInputParserService {
       "filter": this.sentimentMap[sentimentSelection],
     }
 
-    return { socialMediaSearchQuery,  predictionQuery }
+    return {socialMediaSearchQuery, predictionQuery}
   }
 }

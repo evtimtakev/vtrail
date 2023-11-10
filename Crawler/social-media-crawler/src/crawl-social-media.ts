@@ -1,4 +1,4 @@
-import {SubreditSearch} from "./redit/subredit-search";
+import {SubredditSearch} from "./reddit/subreddit-search";
 import * as dotenv from "dotenv";
 import {isBetweenNowAndStartDate, substractPeriod} from "./common/utils/date-time";
 import {StackoverflowSearch} from "./stackoverflow/stackoverflow-search";
@@ -15,15 +15,16 @@ interface socialMediaFilter {
     filterAmount?: string;
     filterUnit?: string;
     hashtagsInput?: string[];
-    id?: socialMediaType
+    id?: socialMediaType,
+    endpoint: string
 }
 
-const crawlInRedit = async (searchTerms?: string[], filterAmount?: string, filterUnit?: string): Promise<any> => {
-    const reditTerms = searchTerms
-    let reditResult = []
+const crawlInReddit = async (subreddit: string, searchTerms?: string[], filterAmount?: string, filterUnit?: string): Promise<any> => {
+    const redditTerms = searchTerms
+    let redditResult = []
 
-    for (let i = 0; i <= reditTerms.length -1; i++) {
-        const { data } = await SubreditSearch.searchInSubredit(reditTerms[i]) || {};
+    for (let i = 0; i <= redditTerms.length -1; i++) {
+        const { data } = await SubredditSearch.searchInSubreddit(subreddit, redditTerms[i]) || {};
 
         if(data && data.children) {
             const children = data.children.filter((entry) => {
@@ -34,13 +35,13 @@ const crawlInRedit = async (searchTerms?: string[], filterAmount?: string, filte
                 }
             });
 
-            reditResult = [...reditResult, ...children]
+            redditResult = [...redditResult, ...children]
         }
 
     }
 
-    const mappedReditPosts = SubreditSearch.toReportModel(reditResult);
-    return mappedReditPosts && mappedReditPosts.length > 0 ? mappedReditPosts : [NO_DATA];
+    const mappedRedditPosts = SubredditSearch.toReportModel(redditResult);
+    return mappedRedditPosts && mappedRedditPosts.length > 0 ? mappedRedditPosts : [NO_DATA];
 }
 
 const crawlInStackoverflow = async (searchTermsInput?: string[], filterAmount?: string, filterUnit?: string): Promise<any> => {
@@ -92,10 +93,10 @@ export const crawlSocialMedia = async (socialMediaSearch: socialMediaFilter[]): 
         for (let i = 0; i <= socialMediaSearch.length - 1; i++) {
             const socialMedia = socialMediaSearch[i];
 
-            if(socialMedia.id === "reddit") {
-                const { searchTerms, filterUnit, filterAmount } = socialMedia
-                const reditResult = await crawlInRedit(searchTerms, filterAmount, filterUnit);
-                response.socials.push({id: "redit", data: reditResult});
+            if (socialMedia.id === "reddit") {
+                const { searchTerms, filterUnit, filterAmount, endpoint } = socialMedia
+                const redditResult = await crawlInReddit(endpoint, searchTerms, filterAmount, filterUnit);
+                response.socials.push({id: "reddit", data: redditResult});
             }
 
             if(socialMedia.id === "stackoverflow") {
@@ -116,6 +117,10 @@ export const crawlSocialMedia = async (socialMediaSearch: socialMediaFilter[]): 
     } catch (e) {
         console.log("=======Hermes failed to run ===========")
         console.log(`======= Here is the stack trace: ${e} ===========`)
+
+        return {
+            socials: []
+        };
     }
 }
 

@@ -1,16 +1,16 @@
 <header class="header-6">
-   <div class="branding pt-12">
-     <div class="logo"></div>
-     <div class="logo-text">VTrail</div>
-   </div>
+  <div class="branding pt-12">
+    <div class="logo"></div>
+    <div class="logo-text">VTrail</div>
+  </div>
   <!-- <div class="header-nav">
     <a href="javascript://" class="active nav-link nav-text">Dashboard</a>
     <a href="javascript://" class="nav-link nav-text">Interactive Analytics</a>
   </div> -->
   <div class="header-actions">
-<!--    <a href="javascript://" class="nav-link nav-icon" aria-label="settings">-->
-<!--      <cds-icon shape="cog"></cds-icon>-->
-<!--    </a>-->
+    <!--    <a href="javascript://" class="nav-link nav-icon" aria-label="settings">-->
+    <!--      <cds-icon shape="cog"></cds-icon>-->
+    <!--    </a>-->
   </div>
 </header>
 <div class="content-container">
@@ -37,35 +37,38 @@
               <div>
                 The models will utilize the given instructions to filter the data.
               </div>
-              <div>The format of the prompts is: </div>
-              <div><b> social network name + type of filter + the filter value</b></div>
               <div>
                 The supported social media platforms are
-                <div><b>Twitter</b></div>
-                <div><b>Reddit</b></div>
-                <div><b>Stack Overflow</b></div>
+                <ng-container *ngFor="let platform of this.platformSource.getPlatforms()">
+                  <div><b>{{platform.name}}</b></div>
+                </ng-container>
               </div>
               <div>
                 The supported type of filters are
-                <div><b>s - sentiment analysis (negative, neutral, positive) </b></div>
-                <div><b>c - categorization </b></div>
-              </div>
-              <div>
-                <span>Example:</span>
-                <div><b>reddit+s+negative</b></div>
+                <div><b>Sentiment analysis (negative, neutral, positive) </b></div>
+                <div><b>Categorization </b></div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="clr-row">
-        <div class="clr-col-4">
+        <div class="clr-col-lg-3 clr-col-12">
+          <vt-platform-selector
+            (onSelectedPlatformChanged)="onPlatformChanged($event)"
+            (onPlatformEndpointChanged)="onEndpointChanged($event)">
+          </vt-platform-selector>
+        </div>
+        <div class="clr-col-lg-3 clr-col-12">
+          <vt-analysis-selector (onSelectedAnalysisChanged)="onAnalysisChanged($event)"
+                                (onSelectedAnalysisOptionChanged)="onAnalysisOptionChanged($event)">
+          </vt-analysis-selector>
+        </div>
+        <div class="clr-col-lg-3 clr-col-12">
           <app-keyword-search (keywords)="updateKeywords($event)"></app-keyword-search>
         </div>
-        <div class="clr-col-4">
-          <app-prompt-search (prompts)="updatePrompts($event)"></app-prompt-search>
-        </div>
-        <div class="clr-col-4">
+        <div class="clr-col-lg-3 clr-col-12">
           <app-time-search (timeInterval)="updateTimeInterval($event)"></app-time-search>
         </div>
       </div>
@@ -76,7 +79,9 @@
           <button class="btn btn-primary width-100" (click)="search()">Search</button>
         </div>
       </div>
-      <div class="loader-wrapper"><app-loader [isLoading]="loading" [state]="loadingState"></app-loader></div>
+      <div class="loader-wrapper">
+        <app-loader [isLoading]="loading" [state]="loadingState"></app-loader>
+      </div>
       <app-social-media-result-grid [gridItems]="searchResult" [isLoading]="loading"></app-social-media-result-grid>
     </section>
   </div>

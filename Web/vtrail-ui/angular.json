@@ -57,7 +57,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -72,7 +72,7 @@
               "browserTarget": "vtrail-ui:build:production"
             },
             "development": {
-              "browserTarget": "vtrail-ui:build:development",
+              "browserTarget": "vtrail-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b83928e7-40e7-407a-b86a-fef5357af685"
   }
 }
