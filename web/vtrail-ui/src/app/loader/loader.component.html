@@ -1,0 +1,11 @@
+
+<div *ngIf="isLoading">
+  <div *ngIf="state === 'fetchingData'">
+    <div class="d-flex"><cds-icon shape="step-forward-2"></cds-icon> <span>Fetching data...</span></div>
+  </div>
+  <div *ngIf="state === 'predicting'">
+    <div class="d-flex"><cds-icon shape="filter-grid"></cds-icon> <span>Making predictions...</span></div>
+  </div>
+  <div class="progress loop"><progress></progress></div>
+</div>
+

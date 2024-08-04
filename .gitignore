@@ -1,6 +1,6 @@
-/Web/vtrail-ui/node_modules
-/Crawler/social-media-crawler/node_modules
-/Crawler/infrastructure/aws/test-env/node_modules
-/Crawler/api/node_modules
-/AI/ai
+/web/vtrail-ui/node_modules
+/crawler/social-media-crawler/node_modules
+/crawler/infrastructure/aws/test-env/node_modules
+/crawler/api/node_modules
+/ai/ai
 .idea

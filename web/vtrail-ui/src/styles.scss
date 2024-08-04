@@ -1,0 +1,90 @@
+.main {
+  padding: 25px
+}
+
+.d-flex {
+  display: flex;
+}
+
+.mt-5 {
+  margin-top: 5px!important;
+}
+
+.mt-20 {
+  margin-top: 20px!important;
+}
+
+.pt-12 {
+  padding-top: .9rem!important;
+}
+
+.branding {
+  font-size: 1.9rem;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.card {
+  min-height: 230px;
+}
+
+.progress {
+  margin-top: 0!important;
+}
+
+.clr-control-container {
+  width: 100%!important;
+
+  .clr-input-wrapper {
+    width: 100%!important;
+
+
+    input {
+      width: 100%!important;
+    }
+  }
+}
+
+.no-data {
+  padding: 50px;
+  text-align: center;
+}
+
+.loader-wrapper {
+  min-height: 80px;
+}
+
+.no-margin {
+  margin: 0!important;
+}
+
+.bg-image {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.07;
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+
+.content-container {
+  position: relative;
+}
+
+
+.logo {
+  background: url("assets/logo.png");
+  width: 50px;
+  height: 50px;
+  background-size: 184%;
+  background-position: center;
+  margin-top: -10px;
+}
+
+.logo-text {
+  margin-top: 5px;
+  margin-left: 3px;
+}

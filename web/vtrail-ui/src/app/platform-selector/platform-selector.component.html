@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-block">
+    <h3 class="card-title">Platform</h3>
+    <div class="card-text">
+      <clr-select-container class="vt-selector">
+        <select clrSelect
+                name="platform"
+                (ngModelChange)="setSelectedPlatform($event)"
+                [(ngModel)]="selectedPlatform"
+                required>
+          <option *ngFor="let platform of this.platformSource.getPlatforms()"
+                  [ngValue]="platform">{{platform.name}}</option>
+        </select>
+      </clr-select-container>
+
+      <clr-input-container *ngIf="selectedPlatform.endpoint != ''">
+        <label>Endpoint</label>
+        <input clrInput
+               placeholder="vmware"
+               name="endpoint"
+               [(ngModel)]="platformEndpoint"/>
+      </clr-input-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-block">
+    <h3 class="card-title">Analysis</h3>
+    <div class="card-text">
+      <clr-select-container>
+        <select clrSelect
+                name="analysis"
+                (ngModelChange)="setAnalysis($event)"
+                [(ngModel)]="selectedAnalysis"
+                required>
+          <option *ngFor="let item of AnalysisSelectorComponent.ANALYSIS"
+                  [ngValue]="item">{{item.name}}</option>
+        </select>
+      </clr-select-container>
+      <clr-select-container *ngIf="selectedAnalysis && selectedAnalysis.options.length != 0">
+        <label>Options</label>
+        <select clrSelect
+                name="analysis-options"
+                (ngModelChange)="setAnalysisOption($event)"
+                [(ngModel)]="selectedAnalysisOption"
+                required>
+          <option *ngFor="let item of this.selectedAnalysis.options"
+                  [ngValue]="item">{{item}}</option>
+        </select>
+      </clr-select-container>
+    </div>
+  </div>
+</div>
