@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, jsonify
 from ai import prep_sentiment_model, sentiment_classification, prep_category_classification_model, categorical_classification
 
 app = Flask(__name__)
-model_sentiment, sentiment_tokenizer = prep_sentiment_model()
+#model_sentiment, sentiment_tokenizer = prep_sentiment_model()
 # model_category, category_tokenizer = prep_category_classification_model()
 
 PROMPTS = {
@@ -16,7 +16,7 @@ def make_predictions():
     prompt = input_json["prm"]
 
     if prompt == PROMPTS["sentiment"]:
-        response = sentiment_classification(model_sentiment, sentiment_tokenizer, input_json["content"], input_json["filter"])
+        response = sentiment_classification(None, None, input_json["content"], input_json["filter"])
     elif prompt == PROMPTS["category"]:
         response = {}
         # response = categorical_classification(model_category, category_tokenizer, input_json["content"], input_json["filter"])

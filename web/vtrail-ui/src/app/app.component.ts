@@ -134,7 +134,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
               });
               return posts;
             }),
-            tap(posts => this.makePredictions(predictionQuery, posts)))
+            tap(posts => this.makePredictions(predictionQuery, posts))
+      )
       .subscribe();
   }
 

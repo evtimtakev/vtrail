@@ -34,93 +34,88 @@ VTrail is a versatile tool designed to scrape social media posts from platforms 
 - **Python:** Backend API for machine learning classification.
 - **Flask:** Web framework for building Python APIs.
 - **Angular:** Frontend framework for building the user interface.
+- **Docker:** Used for consistent setup of the application
 
-## Getting Started
+## Application Overview
+
+This application consists of three microservices designed to work together:
+
+1. **UI Service** - A web interface built with Angular for user interactions.
+2. **Crawler Service** - A Node.js application that crawls and gathers data.
+3. **AI Service** - A backend service using Python for processing and analyzing data.
 
 ### Prerequisites
 
-Make sure you have the following installed:
-
-- Node.js
-- Python
-- Flask
-- Angular CLI
+Before you begin, ensure you have the following installed on your machine:
+- [Docker](https://www.docker.com/get-started)
 
 ### Installation
 
-1. Clone the repository:
+**Building and Running Services:**
 
-    ```bash
-    git clone https://github.com/evtimtakev/HermesV2.git
-    ```
+   Each service has its own `build.sh` and `run.sh` scripts. Follow the instructions for each service:
 
-2. Navigate to the project directory:
-
-    ```bash
-    cd HermesV2
-    ```
-
-3. Install Python dependencies:
-
-    ```bash
-    cd Ai
-    ```
-
-    ```bash
-   python -m venv ai
-    source ai/bin/activate
-    ```
-   
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. Install Node.js dependencies:
-    ```bash
-    cd Crawler
-    ```
-
-    ```bash
-    cd api
-    ```
-
-    ```bash
-    npm install
-    ```
-
-    ```bash
-      cd ..
-    ```
+   #### UI Service
+   Navigate to the `ui` directory:
    ```bash
-      cd social-media-crawler
-    ```
+   cd web
+   ```
+   - Build the UI Docker image:
+     ```bash
+     ./build.sh
+     ```
+   - Run the UI service:
+     ```bash
+     ./run.sh
+     ```
 
-    ```bash
-      npm install
-    ```
+   #### Crawler Service
+   Navigate to the `crawler` directory:
+   ```bash
+   cd ../crawler
+   ```
+   - Build the Crawler Docker image:
+     ```bash
+     ./build.sh
+     ```
+   - Run the Crawler service:
+     ```bash
+     ./run.sh
+     ```
 
-5. Install dependencies for Angular UI:
+   #### AI Service
+   Navigate to the `ai` directory:
+   ```bash
+   cd ../ai
+   ```
+   - Build the AI Docker image:
+     ```bash
+     ./build.sh
+     ```
+   - Run the AI service:
+     ```bash
+     ./run.sh
+     ```
 
+### Usage
 
-## Usage
+- After starting the services, you can access the UI service on `http://localhost:4200` (port may vary).
+- Ensure the Crawler and AI services are up and running to allow the UI to function properly.
 
-To start the application, follow these steps:
+### Stopping the Services
 
-1. Start Node.js API:
+To stop the services, you can use the following command while in each service directory:
+```bash
+docker-compose down
+```
 
-```cd Crawler/social-media-crawler && npm run build cd Crawler/api && npm start```
+### Troubleshooting
 
-
-2. Start Python API (Flask):
-
-```source venv/bin/activate && flask run```
-
-
-3. Start Angular UI:
-```cd UI && npm run start```
-
-
-Visit `http://localhost:4200` in your web browser to access the user interface.
+- If you encounter issues, check the logs by using:
+  ```bash
+  docker logs <container_name>
+  ```
+- Make sure Docker is running and that you have enough permissions to run Docker commands.
 
 ## API Endpoints
 

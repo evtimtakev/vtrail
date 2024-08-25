@@ -14,10 +14,14 @@ RUN apt-get update \
 
 WORKDIR /.
 
-COPY requirements.txt requirements.txt
-
-RUN pip3 install -r requirements.txt
-
 COPY . .
+COPY ./sentiment_classifier /sentiment_classifier
+
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt \
+    && rm -rf /root/.cache/pip
+
+RUN pip install transformers
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "-p", "5000"]
