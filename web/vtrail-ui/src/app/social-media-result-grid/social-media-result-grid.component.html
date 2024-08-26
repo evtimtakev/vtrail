@@ -1,5 +1,13 @@
 <div *ngIf="gridItems.length > 0">
-  <clr-datagrid>
+  <clr-datagrid #resultsgrid>
+    <clr-dg-action-bar>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-outline"
+                (click)="exportToPdf()">
+          Export to PDF
+        </button>
+      </div>
+    </clr-dg-action-bar>
     <clr-dg-column>Title</clr-dg-column>
     <clr-dg-column>description</clr-dg-column>
     <clr-dg-column>Creation date</clr-dg-column>

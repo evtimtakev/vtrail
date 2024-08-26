@@ -25,28 +25,16 @@
               <cds-icon class="alert-icon" shape="info-circle"></cds-icon>
             </div>
             <div class="alert-text">
-              <h3 class="no-margin">Keywords</h3>
               <div>
-                Please provide the keywords you would like to search for in our support social media platforms.
+                Please provide the keywords you would like to search for. <b>Example:</b> VMware,VCDR,vSAN
               </div>
               <div>
-                <b>Example:</b> VMware,VCDR,vSAN
-              </div>
-
-              <h3>Prompts</h3>
-              <div>
-                The models will utilize the given instructions to filter the data.
-              </div>
-              <div>
-                The supported social media platforms are
+                The models will utilize the given instructions to filter the data for the supported social media
+                platforms
                 <ng-container *ngFor="let platform of this.platformSource.getPlatforms()">
-                  <div><b>{{platform.name}}</b></div>
+                  <b>{{platform.name}} / </b>
                 </ng-container>
-              </div>
-              <div>
-                The supported type of filters are
-                <div><b>Sentiment analysis (negative, neutral, positive) </b></div>
-                <div><b>Categorization </b></div>
+                and <b>categorization / Sentiment analysis (negative, neutral, positive)</b>
               </div>
             </div>
           </div>
@@ -79,7 +67,7 @@
           <button class="btn btn-primary width-100" (click)="search()">Search</button>
         </div>
       </div>
-      <div class="loader-wrapper">
+      <div class="loader-wrapper" *ngIf="loading">
         <app-loader [isLoading]="loading" [state]="loadingState"></app-loader>
       </div>
       <app-social-media-result-grid [gridItems]="searchResult" [isLoading]="loading"></app-social-media-result-grid>
