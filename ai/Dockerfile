@@ -17,16 +17,13 @@ WORKDIR /.
 COPY . .
 COPY ./sentiment_classifier /sentiment_classifier
 
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt \
-    && rm -rf /root/.cache/pip
-
 # TODO move these in to reqierments txt
-RUN pip install transformers
-#
-#RUN pip install scipy
-#
-#RUN pip3 install torch torchvision
+RUN pip install -U Flask
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "-p", "5000"]
+RUN pip install transformers
+
+RUN pip install scipy
+
+RUN pip3 install torch torchvision
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "-p", "5000", "--debug"]
