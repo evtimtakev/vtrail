@@ -1,18 +1,14 @@
 import numpy as np
-from tensorflow import keras
-from keras.preprocessing.sequence import pad_sequences
-import pickle
-from io import open
 from transformers import pipeline
 
 max_features = 6479
 max_len = 151
 sentiment_positions = [-1, 0, 1]
-# sentiment_analysis = pipeline("sentiment-analysis", model="siebert/sentiment-roberta-large-english")
+MODEL = "cardiffnlp/twitter-roberta-base-sentiment-latest"
+sentiment_task = pipeline("sentiment-analysis", model=MODEL, tokenizer=MODEL)
 
 
 def sentiment_classification(model, loaded_tokenizer, data, filter=1):
-
     predictions = {
         "negative": [],
         "neutral": [],
@@ -20,13 +16,16 @@ def sentiment_classification(model, loaded_tokenizer, data, filter=1):
     }
 
     for t in data:
-        #sequence = loaded_tokenizer.texts_to_sequences([t["description"]])
-        #test_padded = pad_sequences(sequence, maxlen=max_len)
-        #test_padded = pad_sequences(sequence, maxlen=max_len)
+        text = t["title"]
+        text = preprocess(text)
+        label = sentiment_task(text)[0]["label"]
+        score = sentiment_task(text)[0]["score"]
+        prediction = 0
 
-        #prediction = 0 #sentiment_positions[np.around(model.predict(test_padded), decimals=0).argmax(axis=1)[0]]
-
-        prediction = -1 #sentiment_analysis(t["title"])
+        if label == 'positive' and np.round(float(score), 4) > 0.55:
+            prediction = 1
+        elif label == 'negative' and np.round(float(score), 4) > 0.55:
+            prediction = -1
 
         if prediction == -1:
             predictions["negative"].append(t)
@@ -43,23 +42,17 @@ def sentiment_classification(model, loaded_tokenizer, data, filter=1):
         return predictions["negative"]
 
 
+# Preprocess text (username and link placeholders)
+def preprocess(text):
+    new_text = []
+
+    for t in text.split(" "):
+        t = '@user' if t.startswith('@') and len(t) > 1 else t
+        t = 'http' if t.startswith('http') else t
+        new_text.append(t)
+    return " ".join(new_text)
+
+
 def categorical_classification(model, loaded_tokenizer, data, filter=1):
     return None
 
-
-def prep_sentiment_model():
-    model_sentiment = keras.models.load_model("/sentiment_classifier/final_sentiment_model")
-
-    with open("/sentiment_classifier/tokenizers/tokenizer_new.pickle", "rb") as handle:
-        sentiment_tokenizer = pickle.load(handle)
-
-    return model_sentiment, sentiment_tokenizer
-
-
-def prep_category_classification_model():
-    model_category = keras.saving.load_model("/category_classifier/model")
-
-    with open("/category_classifier/tokenizer/tokenizer.pickle", "rb") as handle:
-        category_tokenizer = pickle.load(handle)
-
-    return model_category, category_tokenizer

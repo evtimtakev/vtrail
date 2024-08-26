@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, url_for, jsonify
-from ai import prep_sentiment_model, sentiment_classification, prep_category_classification_model, categorical_classification
+from ai import sentiment_classification, categorical_classification
 
 app = Flask(__name__)
-#model_sentiment, sentiment_tokenizer = prep_sentiment_model()
-# model_category, category_tokenizer = prep_category_classification_model()
 
 PROMPTS = {
     "sentiment": "s",
