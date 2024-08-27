@@ -26,7 +26,7 @@
             </div>
             <div class="alert-text">
               <div>
-                Please provide the keywords you would like to search for. <b>Example:</b> VMware,VCDR,vSAN
+                Please provide the keywords you would like to search for. <b>Example:</b> VMware, VCF, VSAN
               </div>
               <div>
                 The models will utilize the given instructions to filter the data for the supported social media
@@ -67,6 +67,18 @@
           <button class="btn btn-primary width-100" (click)="search()">Search</button>
         </div>
       </div>
+      <button class="btn btn-link"
+              (click)="openWeeklyVMwareNewsletter()">
+        Weekly VMware Newsletter
+      </button>|
+      <button class="btn btn-link"
+              (click)="openKnownVMwareIssues()">
+        Known VMware Issues
+      </button>|
+      <button class="btn btn-link"
+              (click)="openVMwareExploreLatest()">
+        Latest from VMware Explore
+      </button>
       <div class="loader-wrapper" *ngIf="loading">
         <app-loader [isLoading]="loading" [state]="loadingState"></app-loader>
       </div>

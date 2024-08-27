@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {CommonHttpService} from "./common/services/common-http.service";
 import {CommonMappingService} from "./common/services/common-mapping.service";
 import {SocialMediaPost} from "./common/models";
-import {map, ReplaySubject, Subject, takeUntil, tap} from "rxjs";
+import { filter, map, ReplaySubject, Subject, take, takeUntil, tap } from "rxjs";
 import {LoadingState} from "./common/types";
 import {UserInputParserService} from "./common/services/user-input-parser.service";
 import {PlatformSource} from "./data-sources/platform-source";
@@ -10,6 +10,7 @@ import {PlatformDto} from "./data-sources/platform.dto";
 import {Analysis} from "./data/analysis";
 import {PlatformSelectorComponent} from "./platform-selector/platform-selector.component";
 import {AnalysisSelectorComponent} from "./analysis-selector/analysis-selector.component";
+import { ActivatedRoute, NavigationEnd, Params, Router, RouterEvent } from "@angular/router";
 
 @Component({
    selector: 'app-root',
@@ -40,22 +41,76 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   public searchResult: SocialMediaPost[] = [];
   public loading: boolean = false;
   public loadingState: LoadingState = "fetchingData";
+  private inputParams: Params | undefined;
   private unsubscribeSubject: Subject<void> = new ReplaySubject<void>(1);
 
   constructor(private commonHttp: CommonHttpService,
               private commonMappingService: CommonMappingService,
               private userInputParserService: UserInputParserService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
               public platformSource: PlatformSource) {
   }
 
   ngAfterViewInit(): void {
     this.platformSelectorComponent.setSelectedPlatform(this.platformSource.getPlatforms()[0]);
     this.analysisSelectorComponent.setAnalysis(AnalysisSelectorComponent.ANALYSIS[0]);
+    this.router.events.subscribe(
+      {
+        next: (event) => {
+          if (event instanceof NavigationEnd) {
+            this.inputParams = this.activatedRoute.snapshot.queryParams;
+            if (this.inputParams && this.inputParams["platform"]) {
+              this.search();
+            }
+          }
+        }
+      }
+    );
   }
 
   ngOnDestroy() {
     this.unsubscribeSubject.next();
     this.unsubscribeSubject.complete();
+  }
+
+  openWeeklyVMwareNewsletter() {
+    this.router.navigate([], {
+      queryParams: {
+        "platform": "reddit",
+        "endpoint": "vmware",
+        "prompts": "reddit+s+neutral",
+        "keywords": "vmware",
+        "time": 1,
+        "unit": "w"
+      }
+    });
+  }
+
+  openVMwareExploreLatest() {
+    this.router.navigate([], {
+      queryParams: {
+        "platform": "reddit",
+        "endpoint": "vmware",
+        "prompts": "reddit+s+neutral",
+        "keywords": "explore",
+        "time": 1,
+        "unit": "m"
+      }
+    });
+  }
+
+  openKnownVMwareIssues() {
+    this.router.navigate([], {
+      queryParams: {
+        "platform": "reddit",
+        "endpoint": "vmware",
+        "prompts": "reddit+s+negative",
+        "keywords": "vcf",
+        "time": 6,
+        "unit": "m"
+      }
+    });
   }
 
   updateKeywords(value: any) {
@@ -102,15 +157,29 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   search() {
-    this.prompts =
-      this.selectedPlatform.key + "+" + this.selectedAnalysis.value + "+" +
-      (this.selectedAnalysisOption == "" ? "neutral" : this.selectedAnalysisOption);
+    let platformKey: string;
+    if (this.inputParams && this.inputParams["platform"]) {
+      platformKey = this.inputParams["platform"];
+      this.platformEndpoint = this.inputParams["endpoint"];
+      this.prompts = this.inputParams["prompts"];
+      this.keywords = this.inputParams["keywords"];
+      this.timeInterval = {
+        amount: this.inputParams["time"],
+        unit: this.inputParams["unit"]
+      }
+      this.inputParams = undefined;
+      this.router.navigate([], { queryParams: null });
+    } else {
+      platformKey = this.selectedPlatform.key;
+      this.prompts = platformKey + "+" + this.selectedAnalysis.value + "+" +
+        (this.selectedAnalysisOption == "" ? "neutral" : this.selectedAnalysisOption);
+    }
 
     console.log(this.prompts);
 
     this.loading = true;
     const {socialMediaSearchQuery, predictionQuery} = this.userInputParserService.parsePrompts(
-      [this.selectedPlatform.key],
+      [platformKey],
       this.prompts,
       this.platformEndpoint,
       this.keywords,
